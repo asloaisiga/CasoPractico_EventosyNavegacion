@@ -33,8 +33,8 @@ public class LoginController {
     @FXML
     private Button btnSalir;
 
-    private static final String USUARIO_VALIDO = "AdminPrincipal";
-    private static final String CLAVE_VALIDA = "admin_pr";
+    private static final String USUARIO_VALIDO = "admin";
+    private static final String CLAVE_VALIDA = "admin";
 
     @FXML
     private void loginButtonAction(ActionEvent event) {
@@ -87,7 +87,7 @@ public class LoginController {
 
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(
-                            "/ni/edu/uam/eventosynavegaciones_caso2/fxml/principal-view.fxml"
+                            "/ni/edu/uam/eventosynavegacion_caso2/fxml/consulta-cliente-view.fxml"
                     )
             );
 
@@ -98,11 +98,7 @@ public class LoginController {
                     .getWindow();
 
             stage.setScene(new Scene(root));
-
-            stage.setTitle(
-                    "Sistema de Registro y Consulta de Clientes"
-            );
-
+            stage.setTitle("Consulta de Clientes");
             stage.centerOnScreen();
             stage.show();
 
@@ -110,11 +106,9 @@ public class LoginController {
 
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error");
-            alerta.setHeaderText(
-                    "No se pudo abrir la ventana principal."
-            );
+            alerta.setHeaderText("No se pudo abrir la ventana.");
             alerta.setContentText(
-                    "Verifique que principal-view.fxml exista."
+                    "Verifique que consulta-cliente-view.fxml exista."
             );
 
             alerta.showAndWait();
