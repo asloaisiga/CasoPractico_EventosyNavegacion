@@ -22,7 +22,7 @@
                     <Font size="14.0"/>
                 </font>
             </Label>
-            <TableView fx:id="tvClientes" prefHeight="430.0" prefWidth="830.0" onMouseClicked="#seleccionarCliente">
+            <TableView fx:id="tvClientes" prefHeight="430.0" prefWidth="830.0" onMouseClicked="#manejarDobleClic">
                 <columns>
                     <TableColumn fx:id="colNombreCompleto" prefWidth="220.0" text="Nombre completo"/>
                     <TableColumn fx:id="colTipoCliente" prefWidth="140.0" text="Tipo de cliente"/>
