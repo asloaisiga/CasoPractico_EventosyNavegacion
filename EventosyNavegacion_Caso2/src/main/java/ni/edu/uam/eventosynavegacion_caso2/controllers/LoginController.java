@@ -87,7 +87,7 @@ public class LoginController {
 
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(
-                            "/ni/edu/uam/eventosynavegacion_caso2/fxml/consulta-cliente-view.fxml"
+                            "/ni/edu/uam/eventosynavegacion_caso2/fxml/principal-view.fxml"
                     )
             );
 
@@ -98,7 +98,7 @@ public class LoginController {
                     .getWindow();
 
             stage.setScene(new Scene(root));
-            stage.setTitle("Consulta de Clientes");
+            stage.setTitle("Sistema de Clientes");
             stage.centerOnScreen();
             stage.show();
 
@@ -108,7 +108,7 @@ public class LoginController {
             alerta.setTitle("Error");
             alerta.setHeaderText("No se pudo abrir la ventana.");
             alerta.setContentText(
-                    "Verifique que consulta-cliente-view.fxml exista."
+                    "Verifique que principal-view.fxml exista."
             );
 
             alerta.showAndWait();

@@ -12,7 +12,7 @@ public class RegistroApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RegistroApplication.class.getResource("/ni/edu/uam/eventosynavegacion_caso2/fxml/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Registro!/");
+        stage.setTitle("Sistema de clientes");
         stage.setScene(scene);
         stage.show();
     }

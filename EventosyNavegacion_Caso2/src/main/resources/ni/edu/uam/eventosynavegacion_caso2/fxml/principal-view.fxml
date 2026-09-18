@@ -82,8 +82,10 @@
 
                 <contextMenu>
                     <ContextMenu>
-                        <MenuItem text="Ver actividad seleccionada" onAction="#verActividadSeleccionada" />
-                        <MenuItem text="Limpiar actividad" onAction="#limpiarActividad" />
+                        <items>
+                            <MenuItem text="Ver actividad seleccionada" onAction="#verActividadSeleccionada" />
+                            <MenuItem text="Limpiar actividad" onAction="#limpiarActividad" />
+                        </items>
                     </ContextMenu>
 
                 </contextMenu>

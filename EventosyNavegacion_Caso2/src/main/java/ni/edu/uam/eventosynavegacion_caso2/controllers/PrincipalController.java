@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import ni.edu.uam.eventosynavegacion_caso2.dao.ActividadDao;
 import ni.edu.uam.eventosynavegacion_caso2.models.Actividad;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
@@ -39,7 +39,7 @@ public class PrincipalController {
     @FXML
     private void abrirConsultaClientes(ActionEvent event) {
         actividadDao.agregar(new Actividad("Se abrió la consulta de clientes"));
-        abrirVista(event, "/ni/edu/uam/matricula/consulta-cliente-view.fxml", "Consulta de clientes"
+        abrirVista(event, "/ni/edu/uam/eventosynavegacion_caso2/fxml/consulta-cliente-view.fxml", "Consulta de clientes"
         );
     }
 
