@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<VBox prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.eventosynavegacion_caso2.controllers.PrincipalController">
+    <MenuBar><Menu text="Archivo"> <MenuItem text="Seleccionar carpeta" onAction="#seleccionarCarpeta" />
+        <SeparatorMenuItem />
+        <MenuItem text="Cerrar sesión" onAction="#cerrarSesion" />
+        <MenuItem text="Salir"
+                  onAction="#salirAplicacion" />
+    </Menu>
+        <Menu text="Clientes"> <MenuItem text="Registrar cliente" onAction="#abrirRegistroCliente" />
+            <MenuItem text="Consultar clientes"
+                      onAction="#abrirConsultaClientes" />
+        </Menu>
+        <Menu text="Ayuda"> <MenuItem text="Acerca del sistema" onAction="#mostrarAcercaDe" />
+        </Menu>
+    </MenuBar>
+
+    <ToolBar>
+        <Button fx:id="btnToolbarRegistrar" text="Registrar cliente" onAction="#abrirRegistroCliente" />
+        <Button fx:id="btnToolbarConsultar" text="Consultar clientes" onAction="#abrirConsultaClientes" />
+        <Button fx:id="btnToolbarCarpeta" text="Seleccionar carpeta" onAction="#seleccionarCarpeta" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnToolbarCerrarSesion" text="Cerrar sesión" onAction="#cerrarSesion" />
+    </ToolBar>
+    <VBox alignment="TOP_CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="30.0" right="40.0" bottom="25.0" left="40.0" />
+        </padding>
+        <Label text="SISTEMA DE CLIENTES">
+            <font><Font name="System Bold" size="28.0" /> </font>
+
+        </Label>
+        <Label text="Registro y consulta de solicitudes de clientes">
+            <font> <Font size="15.0" /> </font>
+        </Label>
+        <HBox alignment="CENTER"
+              spacing="25.0">
+
+            <Button fx:id="btnRegistrarCliente" prefHeight="80.0" prefWidth="220.0" text="Registrar cliente"
+                    onAction="#abrirRegistroCliente">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+            <Button fx:id="btnConsultarClientes" prefHeight="80.0" prefWidth="220.0" text="Consultar clientes"
+                    onAction="#abrirConsultaClientes">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+        </HBox>
+        <VBox maxWidth="650.0"
+              spacing="8.0">
+
+            <Label text="Actividad reciente">
+                <font>
+                    <Font name="System Bold"
+                          size="16.0" />
+                </font>
+            </Label>
+
+            <Label text="Haga clic derecho sobre la lista para ver las opciones disponibles." />
+
+            <ListView fx:id="lvActividad" prefHeight="180.0">
+
+                <contextMenu>
+                    <ContextMenu>
+                        <MenuItem text="Ver actividad seleccionada" onAction="#verActividadSeleccionada" />
+                        <MenuItem text="Limpiar actividad" onAction="#limpiarActividad" />
+                    </ContextMenu>
+
+                </contextMenu>
+            </ListView>
+
+        </VBox>
+
+        <Label text="Seleccione una opción para continuar." />
+    </VBox>
+</VBox>
