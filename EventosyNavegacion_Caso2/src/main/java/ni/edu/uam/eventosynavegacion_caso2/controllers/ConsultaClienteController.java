@@ -5,10 +5,16 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import ni.edu.uam.eventosynavegacion_caso2.models.Cliente;
 import ni.edu.uam.eventosynavegacion_caso2.dao.ClienteDao;
 
@@ -16,6 +22,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.io.IOException;
 
 public class ConsultaClienteController implements Initializable {
 
@@ -154,5 +161,33 @@ public class ConsultaClienteController implements Initializable {
 
     public ObservableList<Cliente> getListaClientes() {
         return listaClientes;
+    }
+
+    @FXML
+    private void volverPrincipal(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "/ni/edu/uam/eventosynavegacion_caso2/fxml/principal-view.fxml"
+                    )
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource())
+                    .getScene()
+                    .getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("Sistema de Clientes");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setHeaderText("No se pudo regresar al menú principal");
+            alerta.setContentText(
+                    "Verifique que principal-view.fxml exista correctamente"
+            );
+            alerta.showAndWait();
+        }
     }
 }
