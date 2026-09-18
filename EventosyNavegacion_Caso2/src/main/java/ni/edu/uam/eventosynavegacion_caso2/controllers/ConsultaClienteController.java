@@ -37,83 +37,105 @@ public class ConsultaClienteController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> colTipoSolicitud;
 
-    private final ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
+    private final ObservableList<Cliente> listaClientes =
+            FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         configurarColumnas();
+
         tvClientes.setItems(listaClientes);
     }
 
     private void configurarColumnas() {
-        colNombreCompleto.setCellValueFactory(cliente ->
+
+        colNombreCompleto.setCellValueFactory(datos -> {
+
+            Cliente cliente = datos.getValue();
+
+            String nombreCompleto =
+                    cliente.getNombres()
+                            + " "
+                            + cliente.getApellidos();
+
+            return new ReadOnlyStringWrapper(nombreCompleto);
+        });
+
+        colTipoCliente.setCellValueFactory(datos ->
                 new ReadOnlyStringWrapper(
-                        cliente.getValue().getNombres() + " " +
-                                cliente.getValue().getApellidos()
+                        datos.getValue().getTipoCliente()
                 )
         );
 
-        colTipoCliente.setCellValueFactory(cliente ->
+        colCiudad.setCellValueFactory(datos ->
                 new ReadOnlyStringWrapper(
-                        cliente.getValue().getTipoCliente()
+                        datos.getValue().getCiudad()
                 )
         );
 
-        colCiudad.setCellValueFactory(cliente ->
-                new ReadOnlyStringWrapper(
-                        cliente.getValue().getCiudad()
-                )
-        );
-
-        colFechaNacimiento.setCellValueFactory(cliente ->
+        colFechaNacimiento.setCellValueFactory(datos ->
                 new ReadOnlyObjectWrapper<>(
-                        cliente.getValue().getFechaNacimiento()
+                        datos.getValue().getFechaNacimiento()
                 )
         );
 
-        colTipoSolicitud.setCellValueFactory(cliente ->
+        colTipoSolicitud.setCellValueFactory(datos ->
                 new ReadOnlyStringWrapper(
-                        cliente.getValue().getTipoSolicitud()
+                        datos.getValue().getTipoSolicitud()
                 )
         );
     }
 
     @FXML
-    private void seleccionarCliente(MouseEvent event) {
+    private void manejarDobleClic(MouseEvent event) {
+
         if (event.getClickCount() == 2) {
-            Cliente clienteSeleccionado = tvClientes.getSelectionModel().getSelectedItem();
+
+            Cliente clienteSeleccionado =
+                    tvClientes.getSelectionModel().getSelectedItem();
 
             if (clienteSeleccionado != null) {
+
                 mostrarDetalleCliente(clienteSeleccionado);
             }
         }
     }
 
     private void mostrarDetalleCliente(Cliente cliente) {
-        String servicios;
 
-        if (cliente.getServiciosInteres() == null || cliente.getServiciosInteres().isEmpty()) {
-            servicios = "Ninguno";
-        } else {
-            servicios = String.join(", ", cliente.getServiciosInteres());
-        }
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Detalle del cliente");
-        alert.setHeaderText(cliente.getNombres() + " " + cliente.getApellidos());
+        alerta.setTitle("Detalle del cliente");
 
-        alert.setContentText(
-                "Tipo de cliente: " + cliente.getTipoCliente() +
-                        "\nCiudad: " + cliente.getCiudad() +
-                        "\nFecha de nacimiento: " + cliente.getFechaNacimiento() +
-                        "\nTipo de solicitud: " + cliente.getTipoSolicitud() +
-                        "\nServicios de interés: " + servicios
+        alerta.setHeaderText(
+                cliente.getNombres()
+                        + " "
+                        + cliente.getApellidos()
         );
 
-        alert.showAndWait();
+        alerta.setContentText(
+                "Tipo de cliente: "
+                        + cliente.getTipoCliente()
+
+                        + "\nCiudad: "
+                        + cliente.getCiudad()
+
+                        + "\nFecha de nacimiento: "
+                        + cliente.getFechaNacimiento()
+
+                        + "\nTipo de solicitud: "
+                        + cliente.getTipoSolicitud()
+
+                        + "\nServicios de interés: "
+                        + cliente.getServiciosInteres()
+        );
+
+        alerta.showAndWait();
     }
 
     public void cargarClientes(List<Cliente> clientes) {
+
         listaClientes.clear();
 
         if (clientes != null) {
@@ -122,8 +144,13 @@ public class ConsultaClienteController implements Initializable {
     }
 
     public void agregarCliente(Cliente cliente) {
+
         if (cliente != null) {
             listaClientes.add(cliente);
         }
+    }
+
+    public ObservableList<Cliente> getListaClientes() {
+        return listaClientes;
     }
 }
