@@ -2,7 +2,6 @@ package ni.edu.uam.eventosynavegacion_caso2.controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import ni.edu.uam.eventosynavegacion_caso2.models.Cliente;
+import ni.edu.uam.eventosynavegacion_caso2.dao.ClienteDao;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -37,8 +37,10 @@ public class ConsultaClienteController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> colTipoSolicitud;
 
+    private final ClienteDao clienteDao = new ClienteDao();
+
     private final ObservableList<Cliente> listaClientes =
-            FXCollections.observableArrayList();
+            clienteDao.obtenerRegistros();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

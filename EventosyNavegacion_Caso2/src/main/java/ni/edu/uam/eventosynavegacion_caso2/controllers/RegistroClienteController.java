@@ -6,13 +6,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import ni.edu.uam.eventosynavegacion_caso2.models.Cliente;
+import ni.edu.uam.eventosynavegacion_caso2.dao.ClienteDao;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
 
 public class RegistroClienteController {
     @FXML
@@ -71,6 +76,8 @@ public class RegistroClienteController {
 
 
     private File archivoFotografia;
+
+    private final ClienteDao clienteDao = new ClienteDao();
 
 
     @FXML
@@ -177,6 +184,7 @@ public class RegistroClienteController {
                 rutaFotografia
         );
 
+        clienteDao.agregar(cliente);
 
         Alert alerta = new Alert(
                 Alert.AlertType.INFORMATION
@@ -396,12 +404,29 @@ public class RegistroClienteController {
         if (respuesta.isPresent()
                 && respuesta.get() == ButtonType.OK) {
 
-            Stage ventana =
-                    (Stage) btnCancelar
-                            .getScene()
-                            .getWindow();
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource(
+                                "/ni/edu/uam/eventosynavegacion_caso2/fxml/principal-view.fxml"
+                        )
+                );
 
-            ventana.close();
+                Parent root = loader.load();
+
+                Stage ventana =
+                        (Stage) btnCancelar
+                                .getScene()
+                                .getWindow();
+
+                ventana.setScene(new Scene(root));
+                ventana.setTitle("Sistema de Clientes");
+                ventana.centerOnScreen();
+
+            } catch (IOException e) {
+                mostrarAdvertencia(
+                        "No se pudo regresar a la ventana principal."
+                );
+            }
         }
     }
 }
