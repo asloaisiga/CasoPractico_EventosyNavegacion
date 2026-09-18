@@ -3,7 +3,6 @@ package ni.edu.uam.eventosynavegacion_caso2.controllers;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -47,7 +46,7 @@ public class PrincipalController {
     private void seleccionarCarpeta(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Seleccionar carpeta");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) lvActividad.getScene().getWindow();
 
         File carpeta = directoryChooser.showDialog(stage);
 
@@ -156,7 +155,7 @@ public class PrincipalController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(ruta));
             Parent root = loader.load();
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage)lvActividad.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle(titulo);
             stage.centerOnScreen();
